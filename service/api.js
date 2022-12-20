@@ -36,16 +36,15 @@ export const deleteCalendar = async (id, token) => {
       method: "delete",
     });
   } catch (error) {
+    //TODO: ERROR
     console.log("Error delete", error);
   }
 };
 
 export const createNewCalendar = async (newCalendar) => {
   let token = getUserToken();
-  console.log("TOKEN ->", token);
-  console.log("newCalendar ->", newCalendar);
   try {
-    let postResponse = await axios.post(
+    await axios.post(
       `${baseURL}/calendar_patterns`,
       {
         calendar_patterns: {
@@ -61,6 +60,8 @@ export const createNewCalendar = async (newCalendar) => {
         },
       }
     );
-    console.log("POST RESPONSE ->", postResponse);
-  } catch (e) {}
+  } catch (e) {
+    //TODO: ERROR
+    console.log("error on createNewCaledar", e);
+  }
 };

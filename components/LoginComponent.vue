@@ -64,6 +64,7 @@ export default {
         );
         this.$router.push("/dashboard");
       } catch (e) {
+        // TODO: ERROR
         console.log("Error login in", e);
       }
     },
