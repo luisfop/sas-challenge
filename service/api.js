@@ -27,7 +27,7 @@ export const getCalendar = async (token) => {
   }
 };
 
-export const deleteCalendar = async (id, token) => {
+export const deleteCalendar = (id, token) => {
   try {
     axios.delete(`${baseURL}/calendar_patterns/${id})`, {
       headers: {
@@ -42,15 +42,16 @@ export const deleteCalendar = async (id, token) => {
 };
 
 export const createNewCalendar = async (newCalendar) => {
+  console.log("CALENDARRRRR", newCalendar);
   let token = getUserToken();
   try {
-    await axios.post(
+    let createResponse = await axios.post(
       `${baseURL}/calendar_patterns`,
       {
         calendar_patterns: {
-          bg_color: "#FFFFFF",
-          text_color: "#000000",
-          active: 1,
+          bg_color: newCalendar.bg_color,
+          text_color: newCalendar.text_color,
+          active: +newCalendar.checked,
         },
       },
       {
@@ -60,6 +61,7 @@ export const createNewCalendar = async (newCalendar) => {
         },
       }
     );
+    console.log("create response ->", createResponse);
   } catch (e) {
     //TODO: ERROR
     console.log("error on createNewCaledar", e);
