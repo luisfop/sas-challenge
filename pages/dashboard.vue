@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Index page!</h1>
-
+    
     <div v-if="!error">
       <b-table
         responsive
@@ -28,9 +27,22 @@
           >
         </template>
       </b-table>
-      <b-modal :id="infoModal.id" :title="infoModal.title" ok-only>
-        <pre>{{ infoModal.content }}</pre>
-      </b-modal>
+      <div v-if="showAlert">
+        <div class="alert alert-danger" role="alert">
+          Product removed with succes
+        </div>
+      </div>
+
+      <edit-product-modal :infoModal="infoModal" />
+
+      <div class="d-flex justify-content-end mt-4">
+        <b-button v-b-toggle.collapse-1 variant="primary"
+          >Create new Calendar</b-button
+        >
+      </div>
+      <b-collapse id="collapse-1">
+        <create-product />
+      </b-collapse>
     </div>
     <div v-else>
       <p>Erro ao pegar os dados</p>
@@ -41,11 +53,12 @@
 <script>
 import { BIconTrash, BIconPencil } from "bootstrap-vue";
 import { getCalendar, getUserToken, deleteCalendar } from "../service/api";
+import EditProductModal from "~/components/EditProductModal.vue";
 
 export default {
   name: "IndexPage",
   middleware: "auth",
-  components: { BIconTrash, BIconPencil },
+  components: { BIconTrash, BIconPencil, EditProductModal },
   data() {
     return {
       data: [],
@@ -57,6 +70,7 @@ export default {
         content: "",
       },
       token: "",
+      showAlert: false,
     };
   },
   methods: {
@@ -64,6 +78,14 @@ export default {
       let deletedData = this.data.filter((y) => y.id !== id);
       this.data = deletedData;
       deleteCalendar(id, token);
+      this.showAlert = true;
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 1000);
+      (async () => {
+        const response = await getCalendar(this.token);
+        this.data = response.data.data.entities;
+      })();
     },
 
     editar(id, index, button) {
@@ -76,6 +98,7 @@ export default {
     this.token = getUserToken();
     (async () => {
       const response = await getCalendar(this.token);
+      console.log("RESPONSE ->", response);
       if (response.status !== 200) {
         this.$router.push("/");
       } else {
