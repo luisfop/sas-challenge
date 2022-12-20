@@ -20,7 +20,10 @@
             @click="editar(data.item.id, data.index, $event.target)"
             >Editar</b-button
           >
-          <b-button variant="danger" size="sm" @click="deletar(data.item.id, token)"
+          <b-button
+            variant="danger"
+            size="sm"
+            @click="deletar(data.item.id, token)"
             >Remover</b-button
           >
         </template>
@@ -53,7 +56,7 @@ export default {
         title: "",
         content: "",
       },
-      token: '',
+      token: "",
     };
   },
   methods: {
@@ -64,21 +67,16 @@ export default {
     },
 
     editar(id, index, button) {
-      // console.log("This is DATA ID ->", id);
-      // console.log("This is DATA ID ->", index);
-
       this.infoModal.title = `Row index: ${index}`;
-      // this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
     },
   },
 
   mounted() {
-     this.token = getUserToken();
+    this.token = getUserToken();
     (async () => {
       const response = await getCalendar(this.token);
-      console.log('RESPONSE ->', response)
-      if (response.status !== 200 ) {
+      if (response.status !== 200) {
         this.$router.push("/");
       } else {
         this.data = response.data.data.entities;

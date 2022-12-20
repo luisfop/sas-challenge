@@ -61,11 +61,6 @@ export default {
     };
   },
   middleware: "auth",
-  computed: {
-    idGenerator() {
-      // this.form.id = uuid.v1().Math.floor(Math.random() * 100);
-    },
-  },
   mounted() {
     console.log("MOUNTED");
   },
