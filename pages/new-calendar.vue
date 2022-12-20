@@ -67,7 +67,7 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      //conditional errors
+      //TODO : conditional errors
       createNewCalendar(JSON.parse(JSON.stringify(this.form)));
       // alert(JSON.stringify(this.form));
     },
