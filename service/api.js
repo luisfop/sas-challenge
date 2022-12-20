@@ -61,9 +61,11 @@ export const createNewCalendar = async (newCalendar) => {
         },
       }
     );
-    console.log("create response ->", createResponse);
+    console.log('funfou')
+    return createResponse;
   } catch (e) {
     //TODO: ERROR
     console.log("error on createNewCaledar", e);
+    return {error: 400}
   }
 };
