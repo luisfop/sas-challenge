@@ -2,8 +2,13 @@
   <b-container fluid class="footer-pad">
     <b-row class="h-60" align-h="center" align-v="center">
       <b-col sm="12" lg="4">
-        <div class="mb-2">
-          <h1 class="text-center text-monospace">Login</h1>
+        <div class="mb-2"></div>
+        <div class="waviy">
+          <span style="--i: 1">L</span>
+          <span style="--i: 2">O</span>
+          <span style="--i: 3">G</span>
+          <span style="--i: 4">I</span>
+          <span style="--i: 5">N</span>
         </div>
         <login-component />
       </b-col>
@@ -21,3 +26,36 @@ export default {
   components: { LoginComponent },
 };
 </script>
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.waviy {
+  position: relative;
+  font-size: 50px;
+  margin-left: 1rem;
+}
+.waviy span {
+  font-family: "Alfa Slab One", cursive;
+  position: relative;
+  display: inline-block;
+  color: #c7ddcc;
+  text-transform: uppercase;
+  animation: waviy 1s infinite;
+  animation-delay: calc(0.1s * var(--i));
+}
+@keyframes waviy {
+  0%,
+  40%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-20px);
+  }
+}
+</style>

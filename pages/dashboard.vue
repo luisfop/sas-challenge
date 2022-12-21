@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <h2 class="title">Dashboard</h2>
     <div v-if="!error">
       <b-table
         responsive
@@ -13,18 +13,18 @@
       >
         <template v-slot:cell(options)="data">
           <b-button
-            variant="primary"
             size="sm"
             class="mr-2"
             @click="editar(data.item.id, data.index, $event.target)"
-            >Editar</b-button
-          >
+            ><b-icon-pencil></b-icon-pencil
+          ></b-button>
           <b-button
-            variant="danger"
+            variant="warning"
             size="sm"
             @click="deletar(data.item.id, token)"
-            >Remover</b-button
           >
+            <b-icon-trash></b-icon-trash>
+          </b-button>
         </template>
       </b-table>
       <div v-if="showAlert">
@@ -36,7 +36,7 @@
       <edit-product-modal :infoModal="infoModal" />
 
       <div class="d-flex justify-content-end mt-4">
-        <b-button v-b-toggle.collapse-1 variant="primary"
+        <b-button v-b-toggle.collapse-1 class="btn__newCal"
           >Create new Calendar</b-button
         >
       </div>
@@ -45,7 +45,7 @@
       </b-collapse>
     </div>
     <div v-else>
-      <p>Erro ao pegar os dados</p>
+      <p>Erro getting data</p>
     </div>
   </div>
 </template>
@@ -108,3 +108,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.btn {
+  &__newCal {
+    background: #c7ddcc;
+    border: none;
+    color: black;
+  }
+}
+
+.title {
+  color: #c7ddcc;
+}
+</style>

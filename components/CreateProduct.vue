@@ -42,7 +42,7 @@
           Active
         </b-form-checkbox>
         <div class="d-flex flex-row-reverse mt-4">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn alert-info">Submit</button>
         </div>
       </b-form>
     </div>
@@ -65,9 +65,6 @@ export default {
   props: ["showAlert"],
 
   middleware: "auth",
-  mounted() {
-    console.log("ERROR ->", this.error);
-  },
   methods: {
     onSubmit(event) {
       event.preventDefault();
@@ -75,8 +72,14 @@ export default {
       this.showAlert = true;
       setTimeout(() => {
         this.showAlert = false;
+        (this.form.bg_color = ""),
+          (this.form.text_color = ""),
+          (this.checked = false);
       }, 2000);
     },
   },
 };
 </script>
+
+<style scoped>
+</style>
