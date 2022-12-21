@@ -15,7 +15,7 @@
           <b-button
             size="sm"
             class="mr-2"
-            @click="editar(data.item.id, data.index, $event.target)"
+            @click="editar(data.item, data.index, $event.target)"
             ><b-icon-pencil></b-icon-pencil
           ></b-button>
           <b-button
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <edit-product-modal :infoModal="infoModal" />
+      <edit-product-modal :infoModal="infoModal" :product="product"  />
 
       <div class="d-flex justify-content-end mt-4">
         <b-button v-b-toggle.collapse-1 class="btn__newCal"
@@ -69,6 +69,7 @@ export default {
         title: "",
         content: "",
       },
+      product: {},
       token: "",
       showAlert: false,
     };
@@ -89,6 +90,8 @@ export default {
     },
 
     editar(id, index, button) {
+      this.product = id;
+      console.log("THIS.PRODUCT ->", id);
       this.infoModal.title = `Row index: ${index}`;
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
     },
