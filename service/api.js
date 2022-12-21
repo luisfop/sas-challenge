@@ -42,7 +42,6 @@ export const deleteCalendar = (id, token) => {
 };
 
 export const createNewCalendar = async (newCalendar) => {
-  console.log("CALENDARRRRR", newCalendar);
   let token = getUserToken();
   try {
     let createResponse = await axios.post(
@@ -61,11 +60,40 @@ export const createNewCalendar = async (newCalendar) => {
         },
       }
     );
-    console.log('funfou')
+    console.log("funfou");
     return createResponse;
   } catch (e) {
     //TODO: ERROR
     console.log("error on createNewCaledar", e);
-    return {error: 400}
+    return { error: 400 };
+  }
+};
+
+export const updateCalendar = async (id, token, updatedProduct) => {
+  try {
+    let updateResponse = await axios.put(
+      `${baseURL}/calendar_patterns/${id})`,
+      {
+        calendar_patterns: {
+          bg_color: updatedProduct.bg_color,
+          text_color: updatedProduct.text_color,
+          active: +updatedProduct.checked,
+        },
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("funfou");
+    console.log("updateResponse ->>>>>", updateResponse);
+
+    return updateResponse;
+  } catch (e) {
+    //TODO: ERROR
+    console.log("error on createNewCaledar", e);
+    return { error: 400 };
   }
 };

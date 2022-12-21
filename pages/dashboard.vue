@@ -15,7 +15,7 @@
           <b-button
             size="sm"
             class="mr-2"
-            @click="editar(data.item, data.index, $event.target)"
+            @click="handleModal(data.item, data.index, $event.target)"
             ><b-icon-pencil></b-icon-pencil
           ></b-button>
           <b-button
@@ -33,7 +33,11 @@
         </div>
       </div>
 
-      <edit-product-modal :infoModal="infoModal" :product="product"  />
+      <edit-product-modal
+        :infoModal="infoModal"
+        :product="product"
+        :token="token"
+      />
 
       <div class="d-flex justify-content-end mt-4">
         <b-button v-b-toggle.collapse-1 class="btn__newCal"
@@ -82,17 +86,15 @@ export default {
       this.showAlert = true;
       setTimeout(() => {
         this.showAlert = false;
-      }, 1000);
+      }, 2500);
       (async () => {
         const response = await getCalendar(this.token);
         this.data = response.data.data.entities;
       })();
     },
 
-    editar(id, index, button) {
+    handleModal(id, index, button) {
       this.product = id;
-      console.log("THIS.PRODUCT ->", id);
-      this.infoModal.title = `Row index: ${index}`;
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
     },
   },
