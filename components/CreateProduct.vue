@@ -7,7 +7,7 @@
     </div>
 
     <div>
-      <p class="h4">Please, create your own Calendar</p>
+      <p class="h4">Please, create your own palette</p>
       <b-form @submit="onSubmit">
         <b-form-group
           id="input-group-1"
@@ -63,12 +63,14 @@ export default {
     };
   },
   props: ["showAlert"],
+  emits: ["refresh-list"],
 
   middleware: "auth",
   methods: {
     onSubmit(event) {
       event.preventDefault();
       createNewCalendar(JSON.parse(JSON.stringify(this.form)));
+      this.$emit("refresh-list");
       this.showAlert = true;
       setTimeout(() => {
         this.showAlert = false;

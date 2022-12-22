@@ -23,7 +23,7 @@ export const getCalendar = async (token) => {
 
     return response;
   } catch (e) {
-    return { status: 400 };
+    return { status: 400, error: true, msg:`Error getting data ${error}` };
   }
 };
 
@@ -36,13 +36,15 @@ export const deleteCalendar = (id, token) => {
       method: "delete",
     });
   } catch (error) {
-    //TODO: ERROR
-    console.log("Error delete", error);
+    return {
+      status: 400,
+      error: true,
+      msg: `Error fetching delete data ${error}`,
+    };
   }
 };
 
 export const createNewCalendar = async (newCalendar) => {
-  console.log("CALENDARRRRR", newCalendar);
   let token = getUserToken();
   try {
     let createResponse = await axios.post(
@@ -61,11 +63,32 @@ export const createNewCalendar = async (newCalendar) => {
         },
       }
     );
-    console.log('funfou')
     return createResponse;
   } catch (e) {
-    //TODO: ERROR
-    console.log("error on createNewCaledar", e);
-    return {error: 400}
+    return { status: 400, error: true, msg: `Error creating data ${error}` };
+  }
+};
+
+export const updateCalendar = async (id, token, updatedProduct) => {
+  try {
+    let updateResponse = await axios.put(
+      `${baseURL}/calendar_patterns/${id})`,
+      {
+        calendar_patterns: {
+          bg_color: updatedProduct.bg_color,
+          text_color: updatedProduct.text_color,
+          active: +updatedProduct.checked,
+        },
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return updateResponse;
+  } catch (e) {
+    return { status: 400, error: true, msg: `Error updating data ${error}` };
   }
 };

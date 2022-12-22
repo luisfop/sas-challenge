@@ -14,8 +14,9 @@
         <template v-slot:cell(options)="data">
           <b-button
             size="sm"
+            variant="dark"
             class="mr-2"
-            @click="editar(data.item.id, data.index, $event.target)"
+            @click="handleModal(data.item, data.index, $event.target)"
             ><b-icon-pencil></b-icon-pencil
           ></b-button>
           <b-button
@@ -33,15 +34,20 @@
         </div>
       </div>
 
-      <edit-product-modal :infoModal="infoModal" />
+      <edit-product-modal
+        :infoModal="infoModal"
+        :product="product"
+        :token="token"
+        @refresha-list="refresh"
+      />
 
       <div class="d-flex justify-content-end mt-4">
         <b-button v-b-toggle.collapse-1 class="btn__newCal"
-          >Create new Calendar</b-button
+          >Create new palette color</b-button
         >
       </div>
       <b-collapse id="collapse-1">
-        <create-product />
+        <create-product @refresh-list="refresh" />
       </b-collapse>
     </div>
     <div v-else>
@@ -69,6 +75,7 @@ export default {
         title: "",
         content: "",
       },
+      product: {},
       token: "",
       showAlert: false,
     };
@@ -81,15 +88,22 @@ export default {
       this.showAlert = true;
       setTimeout(() => {
         this.showAlert = false;
-      }, 1000);
+      }, 2500);
       (async () => {
         const response = await getCalendar(this.token);
         this.data = response.data.data.entities;
       })();
     },
 
-    editar(id, index, button) {
-      this.infoModal.title = `Row index: ${index}`;
+    refresh() {
+      (async () => {
+        const response = await getCalendar(this.token);
+        this.data = response.data.data.entities;
+      })();
+    },
+
+    handleModal(id, index, button) {
+      this.product = id;
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
     },
   },
