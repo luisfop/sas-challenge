@@ -1,13 +1,11 @@
 <template>
   <div>
-    <b-modal :id="infoModal.id" title="Product to be updated" ok-only>
+    <b-modal :id="infoModal.id" title="Color to be updated" ok-title-html="close" ok-only>
       <pre>{{ product }}</pre>
 
-      <b-card class="mt-3" header="Update the product">
+      <b-card class="mt-3" header="Update the color">
         <div v-if="showAlert">
-          <div class="alert alert-success" role="alert">
-            Product updated!
-          </div>
+          <div class="alert alert-success" role="alert">Color updated!</div>
         </div>
 
         <div>
@@ -62,7 +60,7 @@
 import { updateCalendar } from "../service/api";
 export default {
   props: ["infoModal", "product", "token"],
-
+  emits: ["refresha-list"],
   data() {
     return {
       updateItem: {
@@ -82,6 +80,14 @@ export default {
         this.token,
         JSON.parse(JSON.stringify(this.updateItem))
       );
+      setTimeout(() => {
+        this.closeModal();
+      },1500);
+    },
+    closeModal() {
+      this.$bvModal.hide(this.infoModal.id);
+      this.$emit("refresha-list");
+      this.showAlert = false;
     },
   },
 };
