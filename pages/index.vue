@@ -3,13 +3,7 @@
     <b-row class="h-60" align-h="center" align-v="center">
       <b-col sm="12" lg="4">
         <div class="mb-2"></div>
-        <div class="waviy">
-          <span style="--i: 1">L</span>
-          <span style="--i: 2">O</span>
-          <span style="--i: 3">G</span>
-          <span style="--i: 4">I</span>
-          <span style="--i: 5">N</span>
-        </div>
+        <h1 class="text-center mb-4">LOGIN</h1>
         <login-component />
       </b-col>
     </b-row>
