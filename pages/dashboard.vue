@@ -38,11 +38,9 @@
         aria-controls="my-table"
       ></b-pagination>
 
-      <div v-if="showAlert">
-        <div class="alert alert-danger mt-4" role="alert">
-          Product removed with succes
-        </div>
-      </div>
+      <b-alert class="alert alert-danger mt-4" role="alert" v-model="showAlert">
+        Product removed with succes
+      </b-alert>
 
       <edit-product-modal
         :infoModal="infoModal"
@@ -105,9 +103,8 @@ export default {
 
     refresh() {
       (async () => {
-        
         const response = await getCalendar(this.token);
-        
+
         this.data = response.data.data.entities;
       })();
     },
