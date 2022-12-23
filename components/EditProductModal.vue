@@ -1,6 +1,11 @@
 <template>
   <div>
-    <b-modal :id="infoModal.id" title="Color to be updated" ok-title-html="close" ok-only>
+    <b-modal
+      :id="infoModal.id"
+      title="Color to be updated"
+      ok-title-html="close"
+      hide-footer
+    >
       <pre>{{ product }}</pre>
 
       <b-card class="mt-3" header="Update the color">
@@ -47,7 +52,7 @@
               Active
             </b-form-checkbox>
             <div class="d-flex flex-row-reverse mt-4">
-              <button type="submit" class="btn alert-info">Update</button>
+              <b-button type="submit" variant="dark">Update</b-button>
             </div>
           </b-form>
         </div>
@@ -82,7 +87,7 @@ export default {
       );
       setTimeout(() => {
         this.closeModal();
-      },1500);
+      }, 1500);
     },
     closeModal() {
       this.$bvModal.hide(this.infoModal.id);

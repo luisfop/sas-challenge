@@ -15,15 +15,15 @@ export const getUserToken = () => {
 
 export const getCalendar = async (token) => {
   try {
-    let response = await axios.get(`${baseURL}/calendar_patterns`, {
+    let response = await axios.get(`${baseURL}/calendar_patterns?per_page=1000`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-
     return response;
   } catch (e) {
-    return { status: 400, error: true, msg:`Error getting data ${error}` };
+    // return { status: 400, error: true, msg:`Error getting data ${error}` };
+    return { error: 'error', status: 400}
   }
 };
 
@@ -65,7 +65,7 @@ export const createNewCalendar = async (newCalendar) => {
     );
     return createResponse;
   } catch (e) {
-    return { status: 400, error: true, msg: `Error creating data ${error}` };
+    return { status: 400, error: true, msg: `Error creating data ${e}` };
   }
 };
 

@@ -23,6 +23,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
+  publicPath: '/REPO_NAME',
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 

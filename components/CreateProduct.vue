@@ -1,5 +1,5 @@
 <template>
-  <b-card class="mt-3" header="Create custom Calendar">
+  <b-card class="mt-3" header="Create custom Palette">
     <div v-if="showAlert">
       <div class="alert alert-success" role="alert">
         Product added with succes
@@ -7,11 +7,10 @@
     </div>
 
     <div>
-      <p class="h4">Please, create your own palette</p>
       <b-form @submit="onSubmit">
         <b-form-group
           id="input-group-1"
-          label="Bg color:"
+          label="Background color:"
           label-for="input-1"
           description="Example: #FFFFFF"
         >
@@ -25,7 +24,7 @@
         </b-form-group>
         <b-form-group
           id="input-group-1"
-          label="text color:"
+          label="Text color:"
           label-for="input-1"
           description="Example: #04ff00"
         >
@@ -42,7 +41,7 @@
           Active
         </b-form-checkbox>
         <div class="d-flex flex-row-reverse mt-4">
-          <button type="submit" class="btn alert-info">Submit</button>
+          <b-button type="submit" variant="dark">Submit</b-button>
         </div>
       </b-form>
     </div>
@@ -60,24 +59,30 @@ export default {
         text_color: "",
         checked: false,
       },
+      showAlert: false,
     };
   },
-  props: ["showAlert"],
-  emits: ["refresh-list"],
+  props: ["data"],
 
   middleware: "auth",
   methods: {
-    onSubmit(event) {
+    async onSubmit(event) {
       event.preventDefault();
-      createNewCalendar(JSON.parse(JSON.stringify(this.form)));
-      this.$emit("refresh-list");
-      this.showAlert = true;
-      setTimeout(() => {
-        this.showAlert = false;
-        (this.form.bg_color = ""),
-          (this.form.text_color = ""),
-          (this.checked = false);
-      }, 2000);
+      let response = await createNewCalendar(
+        JSON.parse(JSON.stringify(this.form))
+      );
+      if (response.status != 200) {
+        this.$router.push("/");
+      } else {
+        this.data.push(response.data.data);
+        this.showAlert = true;
+        setTimeout(() => {
+          this.showAlert = false;
+          (this.form.bg_color = ""),
+            (this.form.text_color = ""),
+            (this.checked = false);
+        }, 2000);
+      }
     },
   },
 };
