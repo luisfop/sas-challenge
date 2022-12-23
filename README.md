@@ -1,4 +1,4 @@
-# search & stay-challange
+# Search & Stay challange
 
 Deploy: 
 https://sas-challenge-luis-preto.vercel.app/
