@@ -3,6 +3,15 @@
 Deploy: 
 https://sas-challenge-luis-preto.vercel.app/
 
+### `Login`
+
+To login, please use this credentials:
+
+"login": {
+"email": "task@searchandstay.com",
+"password": "ph37i45K"
+},
+
 ## Build Setup
 
 ```bash
