@@ -12,6 +12,22 @@ To login, please use this credentials:
 "password": "ph37i45K"
 },
 
+## About this challenge.
+
+This task involves creating a web application using the Vue.js and Nuxt.js (version 2.x) frameworks. The web app should have the ability to perform CRUD (create, read, update, delete) operations on color patterns. This means that the web app should be able to:
+
+    List all of the available color patterns
+    Show the details of a specific color pattern
+    Create a new color pattern
+    Update an existing color pattern
+    Delete a color pattern
+
+To accomplish this, the web app consume 5 endpoints (API methods or functions) that handle each of these CRUD operations. The app send HTTP requests to these endpoints to perform the desired action.
+
+
+Overall, the goal of this task was to create a web app that allows users to manage a list of color patterns using CRUD operations.
+
+
 ## Build Setup
 
 ```bash
