@@ -1,6 +1,10 @@
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
+  target: 'static',
+  router: {
+    base: '/<repository-name>/'
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -22,6 +26,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
+
+  publicPath: '/REPO_NAME',
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
