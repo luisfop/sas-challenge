@@ -6,8 +6,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
-    "deploy": "push-dir --dir=dist --branch=master --cleanup"
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
@@ -21,7 +20,6 @@
     "vue-uuid": "^3.0.0"
   },
   "devDependencies": {
-    "push-dir": "^0.4.1",
     "sass": "^1.57.1",
     "sass-loader": "10"
   }
