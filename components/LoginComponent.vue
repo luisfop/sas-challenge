@@ -38,6 +38,9 @@
           <b-form-valid-feedback :state="validatePassword">
             Looks Good :)
           </b-form-valid-feedback>
+          <b-alert v-model="showAlert" variant="danger" class="mt-4" dismissible>
+            Ops, something's wrong!
+          </b-alert>
         </b-form-group>
 
         <b-button type="submit" variant="dark">Login</b-button>
@@ -54,6 +57,7 @@ export default {
         email: "",
         password: "",
       },
+      showAlert: false,
     };
   },
   methods: {
@@ -86,7 +90,7 @@ export default {
       let response = await this.login();
 
       if (response.error) {
-        alert("Error to login");
+        this.showAlert = true;
       }
     },
   },

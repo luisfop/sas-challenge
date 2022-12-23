@@ -1,10 +1,8 @@
 <template>
   <b-card class="mt-3" header="Create custom Palette">
-    <div v-if="showAlert">
-      <div class="alert alert-success" role="alert">
-        Product added with succes
-      </div>
-    </div>
+    <b-alert v-model="showAlert" class="alert alert-success" role="alert">
+      Product added with succes
+    </b-alert>
 
     <div>
       <b-form @submit="onSubmit">
