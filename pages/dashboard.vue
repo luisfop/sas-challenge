@@ -19,7 +19,7 @@
             size="sm"
             variant="dark"
             class="mr-2"
-            @click="handleModal(data.item, data.index, $event.target)"
+            @click="handleModal(data.item, $event.target)"
             ><b-icon-pencil></b-icon-pencil
           ></b-button>
           <b-button
@@ -105,14 +105,14 @@ export default {
 
     refresh() {
       (async () => {
-        console.log("CLICKED");
+        
         const response = await getCalendar(this.token);
-        console.log("RESPONSE DO REFRESH ->>>", response);
+        
         this.data = response.data.data.entities;
       })();
     },
 
-    handleModal(id, index, button) {
+    handleModal(id, button) {
       this.product = id;
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
     },
@@ -122,7 +122,6 @@ export default {
     this.token = getUserToken();
     (async () => {
       const response = await getCalendar(this.token);
-      console.log("RESPONSEEEEEEE ->", response);
       if (response.status != 200) {
         this.$router.push("/");
       } else {
