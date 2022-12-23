@@ -1,5 +1,8 @@
 # search-challange
 
+The project is deployed here: 
+https://sas-challenge-luis-preto.vercel.app/
+
 ## Build Setup
 
 ```bash
